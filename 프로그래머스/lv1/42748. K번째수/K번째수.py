@@ -1,10 +1,8 @@
 def solution(array, commands):
     answer=[]
-    length=len(commands)
-    for i in range(length):
-        data=array[commands[i][0]-1:commands[i][1]]
-        data.sort()
-        num=commands[i][2]-1
-        answer.append(data[num])
+    for command in commands:
+        newarr= array[command[0]-1 : command[1]]
+        newarr.sort()
+        answer.append(newarr[command[2]-1])
         
     return answer
