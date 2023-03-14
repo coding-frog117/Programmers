@@ -2,7 +2,12 @@ import heapq
 def solution(scoville, K):
     heap=[]
     count=0
+
     heapq.heapify(scoville)
+    
+            
+    if scoville[0]>=K:
+            return count
     
     for count in range(1,len(scoville)):        
         num1=heapq.heappop(scoville)
@@ -11,4 +16,6 @@ def solution(scoville, K):
         heapq.heappush(scoville,newnum)               
         if scoville[0]>=K:
             return count
+
+
     return -1
