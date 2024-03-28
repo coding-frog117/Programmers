@@ -14,7 +14,8 @@ def solution(m, n, puddles):
         for j in range(0, m):   
             if count[i][j] == -1 or count[i][j] != 0 :
                 continue;
-                
+            
+#             가장자리 초기화하지 않음. (이유 - m이 1일때 웅덩이가 있음에도 1로 초기화되는 버그 발생함.)
             # if ((i-1 < 0 or j-1 < 0) and ):
             #     count[i][j] = 1
             #     continue;
