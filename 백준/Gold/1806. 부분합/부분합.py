@@ -15,6 +15,7 @@ while (end < N):
     sum += arr[end]
     
   elif (sum >= S):
+    #짧은 구간 length 갱신
     minLen = min(minLen,end-start+1)
     sum -= arr[start]
     start += 1
