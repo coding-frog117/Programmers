@@ -11,7 +11,8 @@ def solution(n):
 #           y좌표, 대각선 오른쪽, 대각선 왼쪽에 대한 조건을 만족하는지 체크
             if ((i not in ny) and (i+x not in diagonal_right) and (i-x not in diagonal_left)):
                 BT(x+1, ny + [i], diagonal_right + [i+x], diagonal_left + [i-x])
-    
+
+    # 첫번째 row에서 각 col을 BT 실행 시작
     for i in range(n):
         BT(1,[i],[i],[i])
     
