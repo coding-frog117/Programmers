@@ -1,27 +1,34 @@
 from collections import deque
 
 def solution(n, edge):
-    adj_array=[[] for _ in range(n+1)]
-    for (a,b) in edge:
-        adj_array[a-1].append(b-1)
-        adj_array[b-1].append(a-1)
-            
-    length_count=[0 for _ in range(n)]    
-    q=deque()
+    queue = deque()
     
-    seen=set()
-    q.append(0)
-    seen.add(0)
+    vertexList = [[] for i in range(n)]
+    countList = [0 for i in range(n)]
+    seenList= [False for i in range(n)]
     
-    while q:
-        num=q.popleft()
-        adjs=adj_array[num]
-        for adj in adjs:
-            if adj not in seen:
-                seen.add(adj)
-                q.append(adj)
-                length_count[adj]=length_count[num]+1
-    length_count.sort(reverse=True)
-    answer=length_count.count(length_count[0])
-       
+    for a,b in edge:
+        vertexList[a-1].append(b)
+        vertexList[b-1].append(a)
+    
+    seenList[0] = True
+    queue.append(1)
+    maxCount =0
+    
+    while queue:
+        target = queue.popleft() -1
+        for node in vertexList[target]:
+            if (seenList[node-1] == False):
+                queue.append(node)
+                seenList[node-1] = True
+                
+                countList[node-1] = countList[target] + 1
+                if (countList[node-1] > maxCount):
+                    maxCount = countList[node-1]
+                    
+    answer =0
+    for i in countList:
+        if maxCount == i:
+            answer += 1
+        
     return answer
