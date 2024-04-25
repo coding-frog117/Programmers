@@ -1,3 +1,5 @@
+import sys
+
 def solution(sequence, k):
     # 투포인터로 합 구하기
     start =0
@@ -5,7 +7,7 @@ def solution(sequence, k):
     if (sequence[start] == k):
         return [0,0]
     sum = sequence[start] + sequence[end]
-    answer = [1,100000000000]
+    answer = [1,sys.maxsize]
     
     while start <= end:
         if start >= len(sequence) or end >= len(sequence):
