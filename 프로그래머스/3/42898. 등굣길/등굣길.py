@@ -1,6 +1,5 @@
 def solution(m, n, puddles):
         
-    # 최소 경로 카운트할 배열 설정
     count = [[0]*m for i in range(n)]
     count[0][0] = 0
     if (m>1):
@@ -9,7 +8,6 @@ def solution(m, n, puddles):
         count[1][0] = 1
         
     for puddle in puddles:
-        #웅덩이 위치 입력
         count[puddle[1]-1][puddle[0]-1] = -1
     
     for i in range(0, n):
@@ -17,7 +15,11 @@ def solution(m, n, puddles):
             if count[i][j] == -1 or count[i][j] != 0 :
                 continue;
             
-            # 바로 위쪽, 왼쪽 인덱스까지의 최솟값 구하기
+#             가장자리 초기화하지 않음. (이유 - m이 1일때 웅덩이가 있음에도 1로 초기화되는 버그 발생함.)
+            # if ((i-1 < 0 or j-1 < 0) and ):
+            #     count[i][j] = 1
+            #     continue;
+                
             dx = count[i][j-1]
             dy = count[i-1][j]
             
