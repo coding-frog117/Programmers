@@ -44,6 +44,7 @@ def solution(str1, str2):
             copystr2Set.remove(i)
     
     unionSet = unionSet + str2Set
+    print(unionSet,intersectSet)
 
     answer = int((len(intersectSet) / len(unionSet)) * 65536)
     return answer
