@@ -21,11 +21,7 @@ def solution(n, t, m, p):
         return ans
     
     while True:
-        if n == 16:
-            invert = hex(num)
-            invert = invert[2:].upper()
-        else:
-            invert = invertNum(num,n)
+        invert = invertNum(num,n)
         num += 1
         
         # 말한 사람수를 더하기> 멤버수보다 많으면 finish-멤버수로 바꾸고 count 갱신
