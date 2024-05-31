@@ -37,8 +37,7 @@ def solution(orders, course):
         for key,value in newCount:
             if value < maxCount:
                 break
-            invertList = [*key]
-            invertList = ''.join(invertList)
+            invertList = ''.join(key)
             ans.append(invertList)
     
     ans = sorted(ans)    
