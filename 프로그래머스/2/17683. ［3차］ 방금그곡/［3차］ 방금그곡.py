@@ -30,20 +30,13 @@ def solution(m, musicinfos):
             appendLen,mod = divmod(playTime,len(newSingInfo))
             newSingInfo = (newSingInfo * appendLen) + newSingInfo[:mod]
             
-            if m in newSingInfo:
-                answer.append([-playTime,idx,name])
-                
         # 재생 시간이 악보 문자열 길이보다 짧으면 재생시간만큼 자르기
         elif playTime < len(newSingInfo) :
             newSingInfo = newSingInfo[:playTime]
-            
-            if m in newSingInfo:
-                answer.append([-playTime,idx,name])
                 
         # 재생 시간이 악보 문자열 길이와 같다면 바로 비교
-        elif playTime == len(newSingInfo):
-            if m in newSingInfo:
-                answer.append([-playTime,idx,name])
+        if m in newSingInfo:
+            answer.append([-playTime,idx,name])
     
     if not answer :
         return '(None)'
