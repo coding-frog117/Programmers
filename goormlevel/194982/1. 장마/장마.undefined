@@ -1,0 +1,19 @@
+N,M = map(int,input().split())
+inp = list(map(int,input().split()))
+ground = {}
+for idx,i in enumerate(inp):
+	ground[idx] = i
+curr_location = set([])
+
+for i in range(M):
+	s,e = map(int,input().split())
+	for j in range(s-1,e):
+		ground[j] += 1
+		curr_location.add(j)
+		
+	if (i+1) % 3 == 0:
+		for i in curr_location:
+			ground[i] -= 1
+		curr_location = set([])
+		
+print(*ground.values())
