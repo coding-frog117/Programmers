@@ -1,0 +1,43 @@
+T= int(input())
+
+def compare(count1,count2,target):
+	if count1[target] > count2[target]:
+		return 'A'
+	elif count1[target] < count2[target]:
+		return 'B'
+	else:
+		return 'D'
+
+for i in range(T):
+	inp1 = list(map(int,input().split()))
+	inp2 = list(map(int,input().split()))
+	
+	inp1 = inp1[1:]
+	inp2 = inp2[1:]
+	
+	count1 = {4:0,3:0,2:0,1:0}
+	count2 = {4:0,3:0,2:0,1:0}
+	
+	for i in inp1:
+		if count1.get(i) :
+			count1[i] += 1
+		else:
+			count1[i] = 1
+			
+	for i in inp2:
+		if count2.get(i) :
+			count2[i] += 1
+		else:
+			count2[i] = 1
+	
+	isPossible = False
+	for i in range(4,0,-1):
+		result = compare(count1,count2,i) 
+		if result != 'D':
+			isPossible = True
+			print(result)
+			break
+	
+	if not isPossible :
+		print('D')
+print('')
