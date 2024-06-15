@@ -1,0 +1,27 @@
+S = input()
+max_len = 1
+curr_len = 1
+
+def checkPalindrome(s,e,curr_len,max_len):
+	while e+curr_len <= len(S):
+		start = list(S[s:s+curr_len])
+		end = list(reversed(S[e:e+curr_len]))
+		if start == end :
+			max_len = max(max_len,e+curr_len-s)
+		s+= 1
+		e+= 1
+	return max_len
+
+while curr_len <= len(S) // 2:
+	# 팰린드롬 길이가 짝수일 때
+	s = 0
+	e = curr_len
+	max_len = checkPalindrome(s,e,curr_len,max_len)
+	
+	# 팰린드롬 길이가 홀수일 때
+	s = 0
+	e = curr_len + 1
+	max_len = checkPalindrome(s,e,curr_len,max_len)
+		
+	curr_len += 1
+print(max_len)
