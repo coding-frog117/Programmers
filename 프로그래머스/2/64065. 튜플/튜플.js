@@ -4,13 +4,13 @@ function solution(s) {
     const answer = [];
 // s를 배열에 담기
     
-    s= s.slice(1,-1)
-    const sets = s.match(/{[^}]+}/g);
+    s= s.slice(2,-2)
+    const sets = s.split('},{')
     const checkArr= [];
-    
+
     for (let i of sets){
-        i = i.slice(1,-1).split(',').map(Number);
-            checkArr.push(i)
+        i = i.split(',').map(Number);
+        checkArr.push(i)
     }
     
     checkArr.sort((a,b)=>a.length - b.length)
