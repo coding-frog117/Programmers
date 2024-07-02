@@ -25,6 +25,7 @@ function search(board,m,n){
                     break
                 }
             }
+//             2*2 블록이 연결되어있으면 추가
             if (isPossible){
                 isPop = true
                 change.add([i,j])
@@ -39,6 +40,7 @@ function search(board,m,n){
     }return false
 }
 
+// pop된 후 새로운 블록 만들기
 function makeNewBoard(board,m,n){
     const newBoard = new Array(m).fill(null).map(()=>new Array(n).fill(null))
     for (let j=n-1;j>=0;j--){
