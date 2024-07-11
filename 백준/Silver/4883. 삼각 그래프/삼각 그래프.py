@@ -2,14 +2,14 @@ import sys
 
 tc = 1
 while True:
-  N= int(input())
+  N= int(sys.stdin.readline())
   if N == 0:
     break
 
   graph = []
   dp = [[sys.maxsize]*3 for i in range(2)]
   for i in range(N):
-    col = list(map(int,input().split()))
+    col = list(map(int,sys.stdin.readline().split()))
     graph.append(col)
 
   dp[0][0] = graph[0][0]
