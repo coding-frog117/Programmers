@@ -9,10 +9,9 @@ for i in range(N):
 
 while curr_k > 0:
   for i in range(len(coins)-1,-1,-1):
-    if coins[i] <= K:
+    if coins[i] <= curr_k:
       ans += (curr_k//coins[i])
       curr_k -= (curr_k//coins[i] * coins[i])
-      K = curr_k
       break
 
 print(ans)
