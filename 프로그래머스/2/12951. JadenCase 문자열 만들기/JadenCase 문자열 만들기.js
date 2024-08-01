@@ -26,4 +26,5 @@ function solution(s) {
         }
     })
     return answer.join(' ')
+//     최종 문자열 출력
 }
