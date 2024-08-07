@@ -7,6 +7,7 @@ def solution(n):
     end = 1
     
     while end <= n:
+#        n보다 작을 때
         if currSum < n:
             end+= 1
             currSum += (end)
