@@ -1,8 +1,9 @@
-N,M = map(int,input().split())
+import sys
+N,M = map(int,sys.stdin.readline().split())
 number = []
 
 for i in range(N):
-  inp = int(input())
+  inp = int(sys.stdin.readline())
   number.append(inp)
 
 number.sort()
