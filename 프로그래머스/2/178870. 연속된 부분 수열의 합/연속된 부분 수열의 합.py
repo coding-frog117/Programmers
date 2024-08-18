@@ -1,7 +1,6 @@
 import sys
 
 def solution(sequence, k):
-    # 투포인터로 합 구하기
     start =0
     end = 1
     if (sequence[start] == k):
