@@ -1,27 +1,29 @@
-# window 크기를 k로 정하고 max 구하기, max중에서 가장 작은 값 구하기
-import sys
-import heapq
-from collections import deque
+# 파라메트릭 서치 : 결정 문제로 바꾸기 - n명의 인원이 다 건널 수 있는가?
+# n명을 찾기 위해 이진탐색
 
 def solution(stones, k):
+    ans = -1
+    def isPossible(mid,k):
+        cnt = 0
+        for i in stones:
+            if i-mid <= 0:
+                cnt+=1
+            else:
+                cnt = 0
+
+            if cnt >= k:
+                return False
+        return True
+
     start = 0
-    end = k
-    heap = []
-    arr = deque()
-    for idx,i in enumerate(stones[start:end]):
-        arr.append([i,idx])
-        heapq.heappush(heap,[-i,idx])
+    end = max(stones)
+    mid = (start + end) // 2
     
-    minmax = heap[0][0]*-1
-    
-    while end < len(stones):
-        heapq.heappush(heap,[-stones[end],end])
-        if heap[0][1] <= start:
-            while heap[0][1] <= start:
-                heapq.heappop(heap)
-        
-        minmax = min(minmax,-heap[0][0])
-        start += 1
-        end += 1
-        
-    return minmax    
+    while start <= end:
+        mid = (start + end) // 2
+        if isPossible(mid,k):
+            ans = max(ans,mid)
+            start = mid+1
+        else:
+            end = mid-1
+    return start
