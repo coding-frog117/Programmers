@@ -1,7 +1,6 @@
-# 시간표 길이 < m*n 이면 셔틀이 마지막에 오는 시간을 return
-# 그렇지 않다면 현재 셔틀 시간을 탈 수 있는 사람 체크
-# 마지막 셔틀 탈 수 있는 사람 수가 m*n 이상이면 탈 수 있는 시간 구함
-# 만약 다 같다면 그것보다 빠른 시간, 만약 이전 셔틀에 탄 시간도 다 같다면 그것보다 빠른시간 - 셔틀에 탄 사람 시각을 모두 저장해둠
+# 마지막 셔틀 탈 수 있는 사람 수가 m*n 이상이면 마지막 사람보다 1분 빨리 오면 됨
+# 그렇지 않다면 마지막 셔틀 시간에 도착
+
 from collections import deque
 
 def solution(n, t, m, timetable):
@@ -12,14 +11,14 @@ def solution(n, t, m, timetable):
         
     timetable = deque(timetable)
 
-    bus = [[] for i in range(n)]
+    bus = []
     cur_bus = 540
     cnt = 0
     bus_cnt = 1
     
     while bus_cnt <= n:
         if timetable[0] <= cur_bus:
-            bus[bus_cnt-1].append(timetable.popleft())
+            bus.append(timetable.popleft())
             cnt+= 1
         elif timetable[0] > cur_bus :
             if bus_cnt == n:
@@ -46,9 +45,8 @@ def solution(n, t, m, timetable):
         ans = ans_h + ':' + ans_m
         return ans
             
-    if len(bus[-1]) < m:
+    if cnt < m:
         return changeTime(cur_bus)
     else:
-        lastTime = bus[-1][-1]-1
+        lastTime = bus[-1]-1
         return changeTime(lastTime)
-                    
