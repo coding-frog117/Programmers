@@ -7,7 +7,6 @@ dy = [0,1,0,-1]
 
 def poll(maps,m,n):
     newMap = [[None for i in range(n)] for i in range(m)]
-    # 55,45,35,25,15,05,  45,35...
     # 거꾸로 돌면서 각 행을 채워나감
     for i in range(n-1,-1,-1):
         curr_x = i
