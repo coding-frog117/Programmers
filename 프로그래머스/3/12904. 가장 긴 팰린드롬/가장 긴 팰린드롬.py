@@ -1,3 +1,4 @@
+# 투포인터
 def checkPalindrome(S,s,e,max_len):
     while s < e:
         if S[s] != S[e]:
