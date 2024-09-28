@@ -1,3 +1,4 @@
+# 비트연산
 def solution(n, arr1, arr2):
     map1 = []
     map2 = []
