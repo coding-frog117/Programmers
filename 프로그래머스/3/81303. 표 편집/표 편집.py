@@ -1,3 +1,5 @@
+#doubly linkedlist 
+
 class LinkedList :
     def __init__(self,val,prev = None,next = None):
         self.val = val
