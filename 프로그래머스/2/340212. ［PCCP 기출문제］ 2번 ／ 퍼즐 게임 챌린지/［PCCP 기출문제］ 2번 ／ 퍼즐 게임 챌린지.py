@@ -1,4 +1,4 @@
-#1부터 100000까지 이진탐색
+#최솟값부터 최댓값까지 이진탐색
 
 def solution(diffs, times, limit):
     answer = 0
@@ -17,21 +17,21 @@ def solution(diffs, times, limit):
             return False
         return True
     
-    first = 1
+    first = min(diffs)
     last = max(diffs)
     mid = (last + first) // 2
     answer = last
-    while True :
+    while first <= last :
         if mid < 1 or mid > max(diffs):
             break
         # limit보다 작은 경우 last를 내림
         if isPossible(mid):
             answer = min(answer,mid)
-            last = mid
+            last = mid - 1
         # limit보다 큰 경우 first를 올림
         else :
-            first = mid
-        if ((last + first) // 2 == mid) :
-            break
+            first = mid + 1
+        # if ((last + first) // 2 == mid) :
+        #     break
         mid = (last + first) // 2
     return answer
