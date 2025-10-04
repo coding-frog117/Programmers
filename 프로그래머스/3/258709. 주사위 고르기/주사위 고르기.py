@@ -1,6 +1,5 @@
 from itertools import product
 from itertools import combinations
-from bisect import bisect_left
 
 def solution(dice):
     dice_arr = [i for i in range(len(dice))]
@@ -16,22 +15,21 @@ def solution(dice):
         
         a_list = []
         b_list = []
+        win = 0
         for i in range(len(a_dice)):
             a_list.append(dice[a_dice[i]])
             b_list.append(dice[b_dice[i]])
 
-        # a와 b의 모든 경우의 수 구함
+        # a와 b의 모든 경우의 구함
         a_possible = list(product(*a_list))
         b_possible = list(product(*b_list))
+
+        possible = list(product(a_possible,b_possible))
+        for a,b in possible:
+            if sum(a) > sum(b):
+                win += 1
         
-        for idx,a in enumerate(a_possible) :
-            a_possible[idx] = sum(a)
-            b_possible[idx] = sum(b_possible[idx])
-            
-        # b가 가능한 수들의 조합보다 a가 몇개나 큰지 파악
-        b_possible.sort()
-        wins = sum(bisect_left(b_possible, num) for num in a_possible)
-        if wins > max_dice :
-            max_dice = wins
+        if win > max_dice :
+            max_dice = win
             ans = [i+1 for i in (list(a_dice))]
     return ans
