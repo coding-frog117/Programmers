@@ -1,41 +1,36 @@
 def solution(today, terms, privacies):
     answer = []
-    termsSet = {}
-    t_year,t_mon,t_day = list(map(int,today.split('.')))
+    today = "".join(today.split("."))
     
-    # terms의 유효기간을 해시에 저장
-    for i in terms:
-        name,num = i.split()
-        termsSet[name] = int(num)
+    terms_range = {}
+    for t in terms:
+        category, month = t.split()
+        terms_range[category] = int(month)
     
-    for idx,i in enumerate(privacies):
-        date,name = i.split()
-        # 각 개인정보 수집일을 연,월,일로 나눈다
-        year,mon,day = list(map(int,date.split('.')))
+    for idx, p in enumerate(privacies):
+        start, category = p.split()
+        year, month, day = map(int, start.split("."))
         
-        period = termsSet[name]
-        # month를 추가하면서 확인, 12가 넘어가면 year올려줌
-        if period > 12:
-            n,mod = divmod(period,12)
-            year += n
-            if mod != 0:
-                mon += mod
-        else:
-            mon += period
-            
-        if mon > 12:
-            n,mod = divmod(mon,12)
-            year += n
-            if mod != 0:
-                mon = mod
-                
-        print(year,mon,day)
-        # 유효기간 최대일과 today 날짜 비교
-        if t_year > year:
-            answer.append(idx+1)
-        elif t_year == year and t_mon > mon:
-            answer.append(idx+1)
-        elif t_year == year and t_mon == mon and t_day >= day:
-            answer.append(idx+1)
+        month += terms_range[category]
+        year += (month - 1) // 12
+        month = (month - 1) % 12 + 1
         
+        day -= 1
+        if day == 0:
+            day = 28
+            month -= 1
+            if month == 0:
+                month = 12
+                year -= 1
+        
+        end =""
+        for i in [str(year),str(month),str(day)]:
+            if len(i) == 1:
+                end += ("0" + i)
+            else:
+                end += i
+        
+        if today > end:
+            answer.append(idx + 1)
+    
     return answer
