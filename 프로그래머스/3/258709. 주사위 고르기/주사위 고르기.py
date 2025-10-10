@@ -1,35 +1,27 @@
-from itertools import product
-from itertools import combinations
+from itertools import combinations, product
+from bisect import bisect_left
 
 def solution(dice):
-    dice_arr = [i for i in range(len(dice))]
-    # a 주사위의 조합 구하기
-    a_combi = combinations(dice_arr,len(dice)//2)
-    max_dice = 0
-    ans = -1
+    n = len(dice)
+    dices = list(range(n))
+    combi = combinations(dices, n//2)
+    max_win = -1
+    answer = []
 
-    # a주사위 조합별로 체크
-    for idx,a_dice in enumerate(a_combi) :
-        # a가 고른 주사위 제외하고 남은 주사위를 b가 가져감
-        b_dice = list(set(dice_arr) - set(a_dice))
-        
-        a_list = []
-        b_list = []
-        win = 0
-        for i in range(len(a_dice)):
-            a_list.append(dice[a_dice[i]])
-            b_list.append(dice[b_dice[i]])
+    for a_dice in combi:
+        b_dice = [i for i in dices if i not in a_dice]
 
-        # a와 b의 모든 경우의 구함
-        a_possible = list(product(*a_list))
-        b_possible = list(product(*b_list))
+        a_list = [dice[i] for i in a_dice]
+        b_list = [dice[i] for i in b_dice]
 
-        possible = list(product(a_possible,b_possible))
-        for a,b in possible:
-            if sum(a) > sum(b):
-                win += 1
-        
-        if win > max_dice :
-            max_dice = win
-            ans = [i+1 for i in (list(a_dice))]
-    return ans
+        a_sums = [sum(x) for x in product(*a_list)]
+        b_sums = [sum(x) for x in product(*b_list)]
+        b_sums.sort()
+
+        win = sum(bisect_left(b_sums, x) for x in a_sums)
+
+        if win > max_win:
+            max_win = win
+            answer = [i+1 for i in a_dice] 
+
+    return sorted(answer)
