@@ -1,28 +1,34 @@
+# 최대한 많은 이모티콘 플러스 가입 -> 이모티콘 구매 비용 최대
+# 모든 이모티콘을 10,20,30,40퍼 별로 할인율 적용했을 때, 조합별 결과 모두 구해야함
+from collections import defaultdict
 from itertools import product
 
 def solution(users, emoticons):
-    discount = [9,8,7,6]
-    answer = []
-    prices = [[] for i in range(len(emoticons))]
-#     할인율별 모든 조합 구함
-    for idx,emoticon in enumerate(emoticons):
-        for dis in discount:
-            prices[idx].append([(emoticon // 10 * dis),(10-dis)*10])
-    combinations = list(product(*prices))
-    combinationResult = [[0,0] for _ in range(len(combinations))]
+    percent = [10,20,30,40]
+    discount = defaultdict(list)
+    for emoticon in emoticons :
+        for p in percent:
+            discount[emoticon].append([int(emoticon - (emoticon*(p/100))),p])
     
-#     유저별 계산
-    for user in users:
-        want = user[0]
-        limit = user[1]
-        for idx,combi in enumerate(combinations):
-            getPrice = 0
-            for price in combi:
-                if price[1] >= want:
-                    getPrice += price[0]
-            if getPrice >= limit :
-                combinationResult[idx][0] += 1
-            else:
-                combinationResult[idx][1] += getPrice
-    combinationResult.sort(reverse=True)
-    return combinationResult[0]
+    combinations = product(*discount.values())
+    result = []
+    
+    for combi in combinations :
+        emoticon_plus = 0
+        total_price = 0
+        for percent,limit in users:
+            price = 0
+            is_emoticon_plus = False
+            for item_price,item_percent in combi:
+                if item_percent >= percent:
+                    price += item_price
+                    if price >= limit:
+                        is_emoticon_plus = True
+                        emoticon_plus += 1
+                        break
+            if not is_emoticon_plus:
+                total_price += price
+                
+        result.append([emoticon_plus,total_price])
+    result.sort()
+    return result[-1]
