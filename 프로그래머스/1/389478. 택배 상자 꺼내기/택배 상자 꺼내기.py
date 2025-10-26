@@ -28,7 +28,6 @@ def solution(n, w, num):
                 is_reverse = not is_reverse
                 inverse_count = w
             
-            
             count += 1
             if count > n :
                 break
