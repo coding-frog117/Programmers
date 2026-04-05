@@ -1,14 +1,15 @@
 def solution(s):
     answer = ''
-    curr = ''
+    isFirst = True
     
     for i in s:
-        if i == ' ':
-            answer += ' '
-            curr = ''
-        elif curr == '' :
+        if i == " ":
+            isFirst = True
+            answer += " "
+            continue
+        if isFirst :
             answer += i.upper()
-            curr += i
+            isFirst = False
         else :
-            answer += i.lower()
+            answer += i.lower()      
     return answer
