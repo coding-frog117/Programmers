@@ -1,7 +1,9 @@
 def solution(s):
-    s = s.split(' ')
-    s = list(map(int,s))
-#     값 정렬
-    s.sort()
-    answer = f'{s[0]} {s[-1]}'
+    numbers = s.split(" ")
+    answer_arr = list(map(int,numbers))
+    answer = ""
+    answer += str(min(answer_arr))
+    answer += " "
+    answer += str(max(answer_arr))
+    print(answer)
     return answer
